@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  webserver:
+    image: flownative/nginx:latest
+    container_name: ipc_muc_2023_webserver
+
+    ports:
+      - "8080"
+    volumes:
+      - ./:/application
+    environment:
+      - BEACH_PHP_FPM_HOST=ipc_muc_2023_php
+
+  php:
+    image: flownative/php:8.2
+    container_name: ipc_muc_2023_php
+    ports:
+      - "9000"
+      - "9003"
+    security_opt:
+      - no-new-privileges
+    volumes:
+      - ./:/application
+    environment:
+      - PHP_DISPLAY_ERRORS=on

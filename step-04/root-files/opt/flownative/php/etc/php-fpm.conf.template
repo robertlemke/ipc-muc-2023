@@ -1,0 +1,21 @@
+[global]
+
+error_log = ${PHP_FPM_ERROR_LOG_PATH}
+pid = ${PHP_TMP_PATH}/php-fpm.pid
+
+; don't daemonize, because we want to start PHP as a child process of
+; the shell running php-fpm.sh, so we can wait for it with "wait":
+daemonize = no
+
+[www]
+
+access.log = ${PHP_FPM_ACCESS_LOG_PATH}
+
+listen = [::]:${PHP_FPM_PORT}
+
+pm = ${PHP_FPM_PM_MODE}
+pm.max_children = ${PHP_FPM_MAX_CHILDREN}
+
+pm.status_path = /php-fpm-status
+
+clear_env = no
